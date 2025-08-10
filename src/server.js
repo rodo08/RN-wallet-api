@@ -4,9 +4,14 @@ import { initDB } from "./config/db.js";
 import ratelimiter from "./middleware/rateLimiter.js";
 import transactionRoute from "./routes/transactionsRoute.js";
 import cors from "cors";
+import job from "./config/cron.js";
 
 dotenv.config();
+
 const app = express();
+
+if (process.env.NODE_ENV !== "production") job.start();
+
 app.use(
   cors({
     origin: "http://localhost:8081",
@@ -19,8 +24,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
 
-app.get("/health", (req, res) => {
-  res.send("Hello!");
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
 
 app.use("/api/transactions", transactionRoute);
