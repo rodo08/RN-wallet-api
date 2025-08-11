@@ -14,7 +14,11 @@ if (process.env.NODE_ENV !== "production") job.start();
 
 app.use(
   cors({
-    origin: "http://localhost:8081",
+    origin: [
+      "http://localhost:8081",
+      "https://wonderful-daifuku-32519b.netlify.app",
+    ],
+    credentials: true,
   })
 );
 
