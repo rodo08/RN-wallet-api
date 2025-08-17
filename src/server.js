@@ -17,6 +17,7 @@ app.use(
     origin: [
       "http://localhost:8081",
       "https://wonderful-daifuku-32519b.netlify.app",
+      "https://finance.rodrigodev.cl",
     ],
     credentials: true,
   })
